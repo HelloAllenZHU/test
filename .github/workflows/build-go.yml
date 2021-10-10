@@ -17,7 +17,7 @@ on:
     branches: [ master ]
 
   # 允许手动运行工作流
-  workflow_dispatch: on
+  workflow_dispatch: 
 
 # 工作流由一个或多个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
