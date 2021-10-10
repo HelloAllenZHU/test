@@ -33,8 +33,8 @@ jobs:
 
     # job包含的step(步骤)
     steps:
-      #- uses: actions/checkout@v2
-      #- name: 拉取代码
+      - uses: actions/checkout@v2
+      - name: 拉取代码
       
       #- name: 安装go
       #- uses: actions/setup-go@v2
