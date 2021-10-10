@@ -44,7 +44,7 @@ jobs:
           export GO111MODULE=on
           go env
 
-      - name: 运行一系列命令
+      - name: 运行go build命令
         run: |
           go build test.go
 
