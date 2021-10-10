@@ -13,27 +13,32 @@ name: build-go
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
 
   # 允许手动运行工作流
   workflow_dispatch: 
 
 # 工作流由一个或多个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
-  # 本工作流包含一个job，叫作build
+
+  # 本工作流包含的第一个job
   build:
+
+    # job的名称
     name: 编译
-    # 运行工作流所需的操作系统环境
+
+    # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
 
-    # 一个job由许多step(步骤)组成
+    # job包含的step(步骤)
     steps:
       #- uses: actions/checkout@v2
       #- name: 拉取代码
       
       #- name: 安装go
       #- uses: actions/setup-go@v2
+      #- env: 所需要的环境变量
 
       - name: 运行单一命令
         run: echo Hello, world!
@@ -42,3 +47,24 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+    # 本工作流包含的第二个job
+  test:
+    
+    # job的名称
+    name: 测试
+
+    # 运行job所需的操作系统环境
+    runs-on: ubuntu-latest
+
+    # job包含的step(步骤)
+    steps:
+      - name: 纯粹测试
+        env:
+          MY_VAR: Hi there! My name is
+          FIRST_NAME: Allen
+          MIDDLE_NAME: To
+          LAST_NAME: Zhu
+        run: |
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
