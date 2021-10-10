@@ -39,13 +39,14 @@ jobs:
       # 安装go
       - uses: actions/setup-go@v2
 
-      - name: 运行单一命令
-        run: echo Hello, world!
+      - name: 开启go mod
+        run: |
+          export GO111MODULE=on
+          go env
 
       - name: 运行一系列命令
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          go build test.go
 
     # 本工作流包含的第二个job
   test:
