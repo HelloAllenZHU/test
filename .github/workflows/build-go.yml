@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+# 一个基本的工作流文件
 # 1、安装linux系统
 # 2、安装go、设置go环境
 # 3、pull代码
@@ -6,27 +6,27 @@
 # 5、打包go
 # 6、部署go
 
+# 工作流的名称
 name: build-go
 
-# Controls when the workflow will run
+# 工作流运行的前提条件
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  # 允许手动运行工作流
+  workflow_dispatch: on
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# 工作流由一个或多个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
-  # This workflow contains a single job called "build"
+  # 本工作流包含一个job，叫作build
   build:
-    # The type of runner that the job will run on
+    # 运行工作流所需的操作系统环境
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # 一个job由许多step(步骤)组成
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
