@@ -28,9 +28,9 @@ jobs:
 
     # 一个job由许多step(步骤)组成
     steps:
+      - uses: actions/checkout@v2
       - name: 拉取代码
-      #- uses: actions/checkout@v2
-
+      
       #- name: 安装go
       #- uses: actions/setup-go@v2
 
