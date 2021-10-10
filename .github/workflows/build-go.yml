@@ -10,12 +10,12 @@
 name: build-go
 
 # 工作流运行的前提条件
-on:
+on: [
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+]
   # 允许手动运行工作流
   workflow_dispatch: 
 
