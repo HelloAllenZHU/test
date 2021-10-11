@@ -21,10 +21,8 @@ on:
 
 # 工作流由一个或多个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
-
   # 本工作流包含的第一个job
   build:
-
     # job的名称
     name: 编译
 
@@ -48,9 +46,8 @@ jobs:
         run: |
           go build test.go
 
-    # 本工作流包含的第二个job
+  # 本工作流包含的第二个job
   test:
-    
     # job的名称
     name: 测试
 
@@ -67,3 +64,14 @@ jobs:
           LAST_NAME: Zhu
         run: 
           echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
+
+  # 发布到目标机器
+  distribute:
+    # job名称
+    name: 发布
+
+    # 运行job所需的操作系统环境
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 发布还没实现
