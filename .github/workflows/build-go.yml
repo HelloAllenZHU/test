@@ -19,7 +19,7 @@ on:
   # 允许手动运行工作流
   workflow_dispatch: 
 
-# 工作流由一个或多个job(任务)组成，这些job可以顺序执行或者并发执行
+# 工作流由1-n个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
   # 本工作流包含的第一个job
   build:
@@ -65,10 +65,10 @@ jobs:
         run: 
           echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
 
-  # 发布到目标机器
+  # 本工作流包含的第三个job
   distribute:
     # job名称
-    name: 发布
+    name: 发布到目标机器
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
