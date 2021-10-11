@@ -48,6 +48,9 @@ jobs:
 
   # 本工作流包含的第二个job
   test:
+    # 需要先执行build任务
+    needs: build
+
     # job的名称
     name: 测试
 
@@ -67,6 +70,9 @@ jobs:
 
   # 本工作流包含的第三个job
   distribute:
+    # 需要先执行build和test任务
+    needs: [build,test]
+    
     # job名称
     name: 发布到目标机器
 
