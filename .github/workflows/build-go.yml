@@ -81,3 +81,6 @@ jobs:
 
     steps:
       - name: 发布还没实现
+        run: |
+          pwd
+          ls
