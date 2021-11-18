@@ -27,7 +27,3 @@ jobs:
         file: "test.go"
         tags: true
         draft: true
-
-      - run: |
-          cd path/to/artifact
-          ls
