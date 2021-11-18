@@ -13,14 +13,16 @@ on:
 
 jobs:
   upload:
-     # job的名称
-    name: 上传
+    # job的名称
+    name: 编译
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
 
+    # job包含的step(步骤)
     steps:
-      - uses: xresloader/upload-to-github-release@v1
+      - name: upload release
+        uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
