@@ -61,8 +61,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "a" #${{ github.ref }}
-          release_name: "a" #Release ${{ github.ref }} xxxxx
+          tag_name: "b" #${{ github.ref }}
+          release_name: "b" #Release ${{ github.ref }} xxxxx
           body: "./test"
           draft: false
           prerelease: false
