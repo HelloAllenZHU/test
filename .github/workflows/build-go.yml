@@ -61,11 +61,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "7x" #${{ github.ref }}
-          release_name: "7x" #Release ${{ github.ref }} xxxxx
+          tag_name: "a" #${{ github.ref }}
+          release_name: "a" #Release ${{ github.ref }} xxxxx
           body: "./test"
           draft: false
           prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./test
+          asset_name: test
+          #asset_content_type: application/zip
 
   # 本工作流包含的第二个job
   test:
