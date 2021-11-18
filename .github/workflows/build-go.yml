@@ -46,6 +46,8 @@ jobs:
         id : build
         run: |
           go build test.go
+          pwd
+          ls
 
       - name: 发布release
         id: create_release
