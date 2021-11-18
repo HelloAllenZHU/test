@@ -88,7 +88,7 @@ jobs:
     needs: [build,test]
     
     # job名称
-    name: 部署到目标机器
+    name: 部署
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -101,7 +101,7 @@ jobs:
           # Github token
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           # 需要上传的二进制文件
-          file: test
+          file: ./test
           # 需要上传的二进制文件名
           asset_name: test
           # 本次上传打的tag
