@@ -42,7 +42,7 @@ jobs:
       # 设置go环境
       - name: 开启go mod
         run: |
-          export GO111MODULE=on
+          set GO111MODULE=on
           go env
 
       # go build
