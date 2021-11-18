@@ -53,6 +53,22 @@ jobs:
           pwd
           ls
 
+      - name: 上传到Github Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          # Github token
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          # 需要上传的二进制文件
+          file: /home/runner/work/test/test/test
+          # 需要上传的二进制文件名
+          asset_name: test
+          # 本次上传打的tag
+          tag: ${{ github.ref }}
+          # 是否覆盖
+          overwrite: true
+          # 说明
+          body: "This is my release readme file"
+
   # 测试：功能测试和性能测试
   test:
     # job的名称
@@ -107,20 +123,4 @@ jobs:
         run: |
           pwd
           ls
-
-      - name: 上传到Github Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          # Github token
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          # 需要上传的二进制文件
-          file: /home/runner/work/test/test/test
-          # 需要上传的二进制文件名
-          asset_name: test
-          # 本次上传打的tag
-          tag: ${{ github.ref }}
-          # 是否覆盖
-          overwrite: true
-          # 说明
-          body: "This is my release readme file"
   
