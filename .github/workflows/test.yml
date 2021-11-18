@@ -4,7 +4,7 @@ name: build-qt
 # 工作流运行的前提条件
 on:
   push:
-    branches: [ master ]
+    branches: [ test-branch ]
   # pull_request:
   #   branches: [ master ]
 
@@ -23,12 +23,14 @@ jobs:
     steps:
       # 拉取代码
       - uses: actions/checkout@v2
-      
+
+      # 上传到Github Release
       - name: upload release
         uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tags:
           file: ./test.go
           tags: false
-          draft: true
+          draft: false
