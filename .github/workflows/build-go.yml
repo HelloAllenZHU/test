@@ -66,6 +66,11 @@ jobs:
 
     # job包含的step(步骤)
     steps:
+      - name: 检测文件
+          run: |
+            pwd
+            ls
+            
       - name: 功能测试
         env:  #设置该步骤需要用到的环境变量
           MY_VAR: Hi there! My name is
