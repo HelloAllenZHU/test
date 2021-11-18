@@ -52,7 +52,7 @@ jobs:
       - name: Read testfile
         id: testfile
         uses: juliangruber/read-file-action@latest
-          with:
+        with:
             path: ./test
 
       - name: 发布release
@@ -61,8 +61,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "3x" #${{ github.ref }}
-          release_name: "2x" #Release ${{ github.ref }} xxxxx
+          tag_name: "4x" #${{ github.ref }}
+          release_name: "4x" #Release ${{ github.ref }} xxxxx
           body: ${{steps.testfile.outputs.content}}
           draft: false
           prerelease: false
