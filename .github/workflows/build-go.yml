@@ -27,7 +27,7 @@ jobs:
     name: 编译
 
     # job的id
-    id: build
+    id: job_build
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
     name: 测试
 
     # job的id
-    id: test
+    id: job_test
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
     name: 部署到目标机器
 
     # job的id
-    id: deploy
+    id: job_deploy
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -103,7 +103,7 @@ jobs:
     name: 创建发布
 
     # job的id
-    id: release
+    id: job_release
     
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -120,6 +120,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{steps.build.outputs.content}}
+          body: ${{steps.job_build.outputs.content}}
           draft: false
           prerelease: false
