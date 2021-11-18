@@ -51,7 +51,7 @@ jobs:
 
       - name: Read testfile
         id: testfile
-        uses: juliangruber/read-file-action@latest
+        uses: juliangruber/read-file-action@v1.1.4
         with:
             path: ./test
 
@@ -61,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "4x" #${{ github.ref }}
+          tag_name: "5x" #${{ github.ref }}
           release_name: "4x" #Release ${{ github.ref }} xxxxx
           body: ${{steps.testfile.outputs.content}}
           draft: false
