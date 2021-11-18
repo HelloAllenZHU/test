@@ -27,7 +27,7 @@ jobs:
     name: 编译
 
     # 运行job所需的操作系统环境
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # job包含的step(步骤)
     steps:
@@ -59,9 +59,9 @@ jobs:
           # Github token
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           # 需要上传的二进制文件
-          file: /home/runner/work/test/test/test
+          file: /home/runner/work/test/test/test.exe
           # 需要上传的二进制文件名
-          asset_name: test
+          asset_name: test.exe
           # 本次上传打的tag
           tag: ${{ github.ref }}
           # 是否覆盖
