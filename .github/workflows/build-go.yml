@@ -57,7 +57,7 @@ jobs:
         with:
           tag_name: "1x" #${{ github.ref }}
           release_name: "1x" #Release ${{ github.ref }} xxxxx
-          body: ${{steps.build.outputs.content/test}}
+          body: ${{steps.build.outputs.content.test}}
           draft: false
           prerelease: false
 
