@@ -97,6 +97,12 @@ jobs:
 
     # job包含的step(步骤)
     steps:
+      # go build
+      - name: 检测文件
+        run: |
+          pwd
+          ls
+
       - name: 上传到Github Release
         uses: svenstaro/upload-release-action@v2
         with:
