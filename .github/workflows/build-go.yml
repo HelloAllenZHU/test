@@ -26,9 +26,6 @@ jobs:
     # job的名称
     name: 编译
 
-    # job的id
-    id: job_build
-
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
 
@@ -46,6 +43,7 @@ jobs:
           go env
 
       - name: 运行go build命令
+        id : build
         run: |
           go build test.go
 
@@ -56,9 +54,6 @@ jobs:
 
     # job的名称
     name: 测试
-
-    # job的id
-    id: job_test
 
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -82,9 +77,6 @@ jobs:
     # job名称
     name: 部署到目标机器
 
-    # job的id
-    id: job_deploy
-
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
 
@@ -101,9 +93,6 @@ jobs:
 
     # job名称
     name: 创建发布
-
-    # job的id
-    id: job_release
     
     # 运行job所需的操作系统环境
     runs-on: ubuntu-latest
@@ -120,6 +109,6 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{steps.job_build.outputs.content}}
+          body: ${{jobs.build.steps.build.outputs.content}}
           draft: false
           prerelease: false
