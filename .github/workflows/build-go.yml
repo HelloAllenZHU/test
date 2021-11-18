@@ -47,6 +47,18 @@ jobs:
         run: |
           go build test.go
 
+      - name: 发布release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{steps.build.outputs.content}}
+          draft: false
+          prerelease: false
+
   # 本工作流包含的第二个job
   test:
     # 需要先执行build任务
@@ -86,29 +98,3 @@ jobs:
           pwd
           ls
   
-  # 本工作流包含的第四个job
-  relese:
-     # 需要先执行build和test任务
-    needs: [build,test,deploy]
-
-    # job名称
-    name: 创建发布
-    
-    # 运行job所需的操作系统环境
-    runs-on: ubuntu-latest
-
-    steps:
-      #- name: Checkout code
-      #  uses: actions/checkout@v2
-
-      - name: 发布
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{jobs.build.steps.build.outputs.content}}
-          draft: false
-          prerelease: false
