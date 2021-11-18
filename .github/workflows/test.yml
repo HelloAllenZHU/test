@@ -1,0 +1,34 @@
+# 工作流的名称
+name: build-qt
+
+# 工作流运行的前提条件
+on:
+  push:
+    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
+
+  # 允许手动运行工作流
+  workflow_dispatch: 
+
+jobs:
+  upload:
+     # job的名称
+    name: 上传
+
+    # 运行job所需的操作系统环境
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: mkdir -p path/to/artifact
+
+      - run: echo hello > path/to/artifact/world.txt
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt  
+
+      - run: |
+          cd path/to/artifact
+          ls

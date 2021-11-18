@@ -12,16 +12,16 @@ name: build-go
 # 工作流运行的前提条件
 on:
   push:
-    branches: [ master ]
+    branches: [ go-branch ]
   # pull_request:
   #   branches: [ master ]
 
   # 允许手动运行工作流
   workflow_dispatch: 
 
-# 工作流由1-n个job(任务)组成，这些job可以顺序执行或者并发执行
+# 工作流由n个job(任务)组成，这些job可以顺序执行或者并发执行
 jobs:
-  # 本工作流包含的第一个job
+  # 编译工程
   build:
     # job的名称
     name: 编译
@@ -37,23 +37,17 @@ jobs:
       # 安装go
       - uses: actions/setup-go@v2
 
+      # 设置go环境
       - name: 开启go mod
         run: |
           export GO111MODULE=on
           go env
 
-      - name: 运行go build命令
+      # go build
+      - name: 运行go build
         id : build
         run: |
           go build test.go
-          pwd
-          ls
-
-      - name: Read testfile
-        id: testfile
-        uses: juliangruber/read-file-action@v1.1.4
-        with:
-            path: ./test
 
       - name: 发布release
         id: create_release
@@ -67,7 +61,8 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      # 上传可执行程序到Github Release
+      - name: 上传到Github Release
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
@@ -76,9 +71,9 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./test
           asset_name: test
-          asset_content_type: application/zip
+          asset_content_type: application/octet-stream
 
-  # 本工作流包含的第二个job
+  # 测试：功能测试和性能测试
   test:
     # 需要先执行build任务
     needs: build
@@ -87,12 +82,12 @@ jobs:
     name: 测试
 
     # 运行job所需的操作系统环境
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # job包含的step(步骤)
     steps:
       - name: 纯粹测试
-        env:
+        env:  #设置该步骤需要用到的环境变量
           MY_VAR: Hi there! My name is
           FIRST_NAME: Allen
           MIDDLE_NAME: To
@@ -100,7 +95,7 @@ jobs:
         run: 
           echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
 
-  # 本工作流包含的第三个job
+  # 部署：客户端部署到Github Release或公司官网、服务端部署到公司正式服
   deploy:
     # 需要先执行build和test任务
     needs: [build,test]
