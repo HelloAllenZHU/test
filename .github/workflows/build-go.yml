@@ -49,15 +49,21 @@ jobs:
           pwd
           ls
 
+      - name: Read testfile
+        id: testfile
+        uses: juliangruber/read-file-action@latest
+          with:
+            path: ./test
+
       - name: 发布release
         id: create_release
         uses: actions/create-release@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: "2x" #${{ github.ref }}
+          tag_name: "3x" #${{ github.ref }}
           release_name: "2x" #Release ${{ github.ref }} xxxxx
-          body: ${{steps.build.outputs.test}}
+          body: ${{steps.testfile.outputs.content}}
           draft: false
           prerelease: false
 
