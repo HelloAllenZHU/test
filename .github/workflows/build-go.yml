@@ -103,7 +103,7 @@ jobs:
           # Github token
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           # 需要上传的二进制文件
-          file: "./test"
+          file: /home/runner/work/test/test
           # 需要上传的二进制文件名
           asset_name: test
           # 本次上传打的tag
