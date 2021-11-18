@@ -20,12 +20,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: Guerra24/upload-to-release@v1
-        with:
-          name: my-artifact
-          path: test.go
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          content-type: text/plain # Optional
+      uses: xresloader/upload-to-github-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        file: "test.go"
+        tags: true
+        draft: true
+
 
       - run: |
           cd path/to/artifact
