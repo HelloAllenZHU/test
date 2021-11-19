@@ -65,9 +65,9 @@ jobs:
           # Github token
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           # 需要上传的二进制文件
-          file: /home/runner/work/test/test/test.exe
+          file: ./test
           # 需要上传的二进制文件名
-          asset_name: test.exe
+          asset_name: test
           # 本次上传打的tag
           tag: ${{ github.ref }}
           # 是否覆盖
