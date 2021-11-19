@@ -29,25 +29,31 @@ jobs:
     # 运行job所需的操作系统环境
     runs-on: windows-latest
 
+    outputs:
+      output1 :${{ steps.step4.outputs.test }}
+
     # job包含的step(步骤)
     steps:
       # 拉取代码
       - name: 拉取代码
+        id : step1
         uses: actions/checkout@v2
       
       # 安装go
       - name: 安装go
+        id : step2
         uses: actions/setup-go@v2
 
       # 设置go环境
       - name: 开启go mod
+        id : step3
         run: |
           set GO111MODULE=on
           go env
 
       # go build
       - name: 运行go build
-        id : build
+        id : step4
         run: |
           go build test.go
           pwd
@@ -71,6 +77,9 @@ jobs:
 
   # 测试：功能测试和性能测试
   test:
+    # 需要先执行build任务
+    needs: [build]
+
     # job的名称
     name: 测试
 
@@ -85,25 +94,12 @@ jobs:
           ls
 
       - name: 功能测试
-        env:  #设置该步骤需要用到的环境变量
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Allen
-          MIDDLE_NAME: To
-          LAST_NAME: Zhu
         run: 
           echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
 
       - name: 性能测试
-        env:  #设置该步骤需要用到的环境变量
-          MY_VAR: Hi there! My name is
-          FIRST_NAME: Allen
-          MIDDLE_NAME: To
-          LAST_NAME: Zhu
         run: 
-          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
-    
-    # 需要先执行build任务
-    needs: [build]
+          echo ${{needs.build.outputs.output1}}
 
   # 部署：客户端部署到Github Release或公司官网、服务端部署到公司正式服
   deploy:
