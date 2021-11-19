@@ -27,7 +27,7 @@ jobs:
     name: 编译
 
     # 运行job所需的操作系统环境
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     outputs:
       output1: ${{steps.step1.outputs.test}}
@@ -48,7 +48,7 @@ jobs:
       - name: 开启go mod
         id : step3
         run: |
-          set GO111MODULE=on
+          export GO111MODULE=on
           go env
 
       # go build
