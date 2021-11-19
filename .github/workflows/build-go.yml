@@ -30,7 +30,7 @@ jobs:
     runs-on: windows-latest
 
     outputs:
-      output1 :${{ steps.step4.outputs.test }}
+      output1: ${{steps.step1.outputs.test}}
 
     # job包含的step(步骤)
     steps:
